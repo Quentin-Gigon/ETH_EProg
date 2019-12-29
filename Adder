@@ -1,0 +1,25 @@
+import java.util.Scanner;
+import java.math.*;
+
+public class Adder {
+
+	public static void main(String[] args) {
+		
+		int zahl1 = -1;
+		while (zahl1<0) {
+		System.out.println("Geben Sie Zahl 1 ein");
+		Scanner scanner = new Scanner(System.in);
+		zahl1 = scanner.nextInt();
+		}
+		
+		int zahl2 = -1;
+		while (zahl2<0) {
+		System.out.print("Geben Sie Zahl 2 ein");
+		Scanner scanner2 = new Scanner(System.in);
+		zahl2 = scanner2.nextInt();
+		}
+	
+		int result = zahl1 + zahl2;
+		System.out.println(zahl1 + " + " + zahl2 + " = " + result);	
+	}
+}
