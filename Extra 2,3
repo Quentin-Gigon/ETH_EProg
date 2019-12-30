@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Extra2 {
+
+	public static void main(String[] args) {
+		
+		int zahl = -1;
+		while (zahl < 0 || zahl > 9) {
+			System.out.println("Give me number pls");
+			Scanner scanner1 = new Scanner(System.in); 
+			zahl = scanner1.nextInt();
+		}
+	
+		lvl(zahl,1,4);
+		lvl(zahl,3,3);
+		lvl(zahl,5,2);
+		lvl(zahl,7,1);
+		lvl(zahl,9,0);
+		lvl(zahl,7,1);
+		lvl(zahl,5,2);
+		lvl(zahl,3,3);
+		lvl(zahl,1,4);
+	}
+	
+	public static void lvl(int digit, int timestoprint, int dot) {
+		for (int i=0; i < dot; i++) {
+			System.out.print(".");
+		}
+		for (int i=0; i < timestoprint; i++ )
+		System.out.print(digit);
+		for (int i=0; i < dot; i++) {
+			System.out.print(".");
+		}
+		System.out.println();
+	}				
+}
