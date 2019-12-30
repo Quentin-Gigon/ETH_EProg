@@ -1,0 +1,22 @@
+public class Extra1 {
+
+	public static void main(String[] args) {
+		doublerow(1000);
+
+	}
+	
+	public static void doublerow(int row) {
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < 3; j++) {
+				System.out.print("**");
+				System.out.print("..");
+			}
+			System.out.println();
+			for (int k = 0; k < 3; k++) {
+				System.out.print("..");
+				System.out.print("**");
+			}
+			System.out.println();
+		}
+	}
+}
