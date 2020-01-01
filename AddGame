@@ -1,0 +1,46 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class AddGame {
+
+	public static void main(String[] args) {
+		
+		Scanner console = new Scanner(System.in);
+		Random rand = new Random();
+		
+		int points = 0;
+		int wrong = 0;
+		while (wrong <3) {
+			int result = play(console,rand);
+			if (result==1) {
+				points++;
+			}
+			else {
+				wrong++;
+			}
+		}
+		System.out.println("You got " + points + " total points!");
+	}
+	
+	public static int play(Scanner console, Random rand) {
+		int operands = rand.nextInt(4)+2;
+		int sum = rand.nextInt(10)+1;
+		System.out.print(sum);
+		
+		for (int i=1; i<=operands; i++) {
+			int n = rand.nextInt(10)+1;
+			sum = sum + n;
+			System.out.print(" + " + n);
+		}
+		
+		System.out.print(" = ");
+		if (console.nextInt() == sum) {
+			System.out.println("Correct! +1pt");
+			return 1;
+		}
+		else {
+			System.out.println("Wrong! 0pt");
+			return 0;
+		}
+	}
+}
