@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+/*
+ * 
+ * This program calculate the sequence 1/1^2 + 1/2^2 + ... + 1/N^2
+ */
+public class Reihe {
+
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		System.out.println("Input a number");
+		double n = console.nextDouble();
+		double sum = 0.0;
+    
+		if (n==0.0) {
+			System.out.println("Undefined");
+		}
+    
+		else if (n==1.0) {
+			System.out.println(n);
+		}
+    
+		else if (n<0) {
+			System.out.println("Only natural numbers please");
+		}
+    
+		else {
+			while (n-1 > -1) {
+				sum = sum + (1/(n*n));
+				n -= 1;
+			}
+			System.out.println(sum);
+		}
+	}
+}
