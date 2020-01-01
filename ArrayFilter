@@ -1,0 +1,32 @@
+import java.util.Arrays;
+import java.util.Random;
+
+public class Filter {
+
+	public static void main(String[] args) {
+		
+		
+		int[] unfiltered = new int[5];
+		Random rand = new Random();
+		unfiltered[0] = rand.nextInt();
+		unfiltered[1] = rand.nextInt();
+		unfiltered[2] = rand.nextInt();
+		unfiltered[3] = rand.nextInt();
+		unfiltered[4] = rand.nextInt();
+		
+		filter(unfiltered);
+		
+		System.out.println(Arrays.toString(unfiltered));
+	}
+	
+	public static void filter(int[] filtered) {
+		for (int i=0; i < filtered.length; i++) {
+			if (filtered[i] < 0) {
+				filtered[i]=0;
+			}
+			else {
+				filtered[i] = filtered[i];
+			}
+		}
+	}
+}
