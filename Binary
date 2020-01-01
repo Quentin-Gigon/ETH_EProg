@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+//This program displays a number in binary without using arrays or strings
+
+public class Binaer {
+		
+	public static void main(String[] args) {
+		
+		Scanner console = new Scanner(System.in);
+		System.out.println("What number do you want do display in binary?");
+		double n = console.nextInt();
+		double power = 0;
+		while (n > Math.pow(2,power)) {
+			power++;
+		}
+		if (power>0) {
+			power--;
+		}
+		binary(n,power);		
+	}
+	
+	public static void binary(double n, double power) {
+		if (power<0) {
+			return;
+		}
+		else if(Math.pow(2, power)<=n) {
+			System.out.print("1");
+			binary(n-Math.pow(2, power), power-1);
+		}
+		else {
+			System.out.print("0");
+			binary(n,power-1);
+		}
+	}	
+}
