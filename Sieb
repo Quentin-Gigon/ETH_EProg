@@ -1,0 +1,43 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+//Program which outputs and counts all primes up to a certain input number
+
+public class Sieb {
+
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		System.out.println("Up to which number do you want to know how many primes there are?");
+		int limit = console.nextInt();
+		int[] primelist = createprimelist(limit);
+		int primecounter = 0;
+		
+		for (int i=0; i<primelist.length; i++) {
+			if (primelist[i] != 0) {
+				primecounter++;
+			}
+		}
+		System.out.println("There are " + primecounter + " prime numbers between 1 and " + limit );
+	}
+	
+	//method which returns an array of prime numbers up to specified input parameter
+	public static int[] createprimelist(int limit) {
+		int[] primelist = new int[limit];
+		//loop to iterate through numbers up to limit
+		for (int i=2; i<=limit; i++) {
+			boolean isprime = true;
+			//loop to iterate through possible factors, if factor if found, isprime is set to false
+			for (int j=2; j<i; j++) {
+				if (i%j==0) {
+					isprime = false;
+				}
+			}
+				//if isprime is true, no factors were found, i.e. i is prime, stored in array primelist
+				if (isprime) {
+					System.out.println(i + " is prime");
+					primelist[i-2]=i;
+				}
+		}
+		return primelist;
+	}
+}
