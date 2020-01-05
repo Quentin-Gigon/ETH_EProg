@@ -1,0 +1,137 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import gui.Window; // dieser Import wird benoetigt, falls das Histogramm in einem Fenster gezeichnet wird und die Window-Klasse verwendet wird
+
+public class DatenAnalyse {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		Scanner scanner = new Scanner(new File("groessen.txt"));
+		int[] groessen = liesGroessen(scanner);
+
+		einfacheAnalyse(groessen);
+
+		int histMin = 140; // Wir nehmen an, dass alle Groessen >= 1.40m sind
+		int histMax = 200; // Wir nehmen an, dass alle Groessen < 2.00m sind
+		histogrammAnalyse(groessen, histMin, histMax);
+	}
+
+	/**
+	 * Liest die Körpergrössen von dem gegebenen Scanner ein und gibt sie als Array
+	 * zurück.
+	 */
+	static int[] liesGroessen(Scanner scanner) {
+		int[] groessen = new int[scanner.nextInt()];
+		int index = 0;
+		while (scanner.hasNextInt()) {
+			groessen[index] = scanner.nextInt();
+			index++;
+		}
+		return groessen;
+	}
+
+	/**
+	 * Macht eine einfache Datenanalyse: Gibt die Anzahl Daten, das Minimum, das
+	 * Maximum und den Durchschnitt der Körpergrössen aus.
+	 */
+	static void einfacheAnalyse(int[] groessen) {
+		// iterate through array to find max
+		int max = groessen[0];
+		for (int i = 1; i < groessen.length; i++) {
+			if (groessen[i] > max) {
+				max = groessen[i];
+			}
+		}
+		System.out.println("Max: " + max);
+
+		// iterate through array to find min
+		int min = groessen[0];
+		for (int i = 1; i < groessen.length; i++) {
+			if (groessen[i] < min) {
+				min = groessen[i];
+			}
+		}
+		System.out.println("Min: " + min);
+
+		int sum = groessen[0];
+		for (int i = 1; i < groessen.length; i++) {
+			sum = sum + groessen[i];
+		}
+		int total = groessen.length;
+		int average = sum / total;
+		System.out.println("Average: " + average);
+		System.out.println("n = " + total);
+
+	}
+	// iterate through array to find average
+
+	/**
+	 * Erstellt ein Histogramm der Körpergrössen und gibt es aus. Zuerst wird der
+	 * Benutzer nach der Anzahl Histogramm-Klassen gefragt.
+	 */
+	static void histogrammAnalyse(int[] groessen, int histMin, int histMax) {
+		Scanner console = new Scanner(System.in);
+		System.out.println("How many different size categories do you want?");
+		int klassen = console.nextInt();
+		int[] hist_array = erstelleHistogramm(groessen, histMin, histMax, klassen);
+		int breite = klassenBreite(histMin, histMax, klassen);
+		int histMin_bound = histMin + breite;
+		for (int i = 0; i < hist_array.length; i++) {
+			System.out.print("[" + histMin + "," + histMin_bound + ") ");
+			for (int j = 0; j < hist_array[i]; j++) {
+				System.out.print(":D");
+			}
+			System.out.println();
+			histMin = histMin_bound;
+			histMin_bound = histMin + breite;
+		}
+
+	}
+
+	/**
+	 * Erstellt von den Körpergrössen in dem "groessen"-Array ein Histogramm mit den
+	 * gegebenen Grössen Minimum, Maximum und Anzahl Klassen.
+	 * 
+	 * @return das Histogramm, als Array. Jedes Element entspricht einer Klasse im
+	 *         Histogramm und enthält die Anzahl Körpergrössen in dieser Klasse.
+	 */
+	static int[] erstelleHistogramm(int[] groessen, int histMin, int histMax, int klassen) {
+		int breite = (histMax - histMin) / klassen;
+		int[] hist_array = new int[klassen];
+		int histMin_bound = histMin + breite;
+		// iterates through array for each class
+		for (int i = 0; i < hist_array.length; i++) {
+			int counter = 0;
+			// iterates for each size in each class
+			for (int j = histMin; j < histMin_bound; j++) {
+				// iterates through groessen and counts number of corresponding sizes
+				for (int k = 0; k < groessen.length; k++) {
+					if (groessen[k] == j) {
+						counter++;
+					}
+				}
+			}
+			hist_array[i] = counter;
+			histMin = histMin_bound;
+			histMin_bound = histMin + breite;
+		}
+
+		return hist_array;
+	}
+
+	/**
+	 * Gibt die Klassenbreite in einem Histogramm mit den gegebenen Grössen Minimum,
+	 * Maximum und Anzahl Klassen zurück. Falls sich die gesamte Breite des
+	 * Histogramms nicht restlos auf die Klassen aufteilen lässt, wird die
+	 * Klassenbreite aufgerundet. Das heisst, dass das Histogramm "histMax"
+	 * überschreiten kann.
+	 */
+	static int klassenBreite(int histMin, int histMax, int klassen) {
+		System.out.println("How many different size categories do you want?");
+		double histMax_double = (double) histMax;
+		double histMin_double = (double) histMin;
+		double breite_double = Math.ceil((histMax_double - histMin_double) / klassen);
+		int breite = (int) breite_double;
+		return breite;
+	}
+}
