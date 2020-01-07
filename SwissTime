@@ -1,0 +1,100 @@
+public class SwissTime {
+
+	public static void main(String[] args) {
+		// Die Beispiele vom Übungsblatt:
+		System.out.println("00:00 -> " + toSwissGerman("00:00"));
+		System.out.println("01:45 -> " + toSwissGerman("01:45"));
+		System.out.println("09:25 -> " + toSwissGerman("09:25"));
+		System.out.println("12:01 -> " + toSwissGerman("12:01"));
+		System.out.println("16:46 -> " + toSwissGerman("16:46"));
+		System.out.println("21:51 -> " + toSwissGerman("21:51"));
+		System.out.println("22:37 -> " + toSwissGerman("22:37"));
+	}
+
+	public static String toSwissGerman(String time) {
+		// TODO: Fügen Sie hier Ihre Lösung ein. Sie können
+		// auch zusätzliche Methoden hinzufügen.
+
+		// compute hour mod 12, parse string to find int
+		int hh = Integer.parseInt(time.substring(0, 2));
+		int mm = Integer.parseInt(time.substring(3, 5));
+		String mm_prefix = "";
+		String suffix = "";
+		String suffix_i = "";
+
+		// determine minute prefix
+		// mm is between 1 and 15
+		if ((mm < 25) && mm != 0) {
+			if (mm == 15) {
+				mm_prefix = "viertel ab ";
+			} else {
+				mm_prefix = mm + " ab ";
+			}
+		}
+
+		// mm is between 25 and 39
+		if ((25 <= mm) && (mm <= 39)) {
+			if (mm < 30) {
+				mm_prefix = 30 - mm + " vor halbi ";
+				hh++;
+			} else if (mm == 30) {
+				mm_prefix = "halbi ";
+				hh++;
+			} else if (mm > 30) {
+				mm_prefix = mm - 30 + " ab halbi ";
+				hh++;
+			}
+		}
+
+		// mm is between 40 ad 59
+		if ((40 <= mm) && (mm <= 59)) {
+			if (mm == 45) {
+				mm_prefix = "viertel vor ";
+				hh++;
+			} else {
+				mm_prefix = 60 - mm + " vor ";
+				hh++;
+			}
+		}
+
+		// determine time of day suffix based on hour
+		// hour is between 23 and 4
+		if ((23 <= hh) || (hh <= 4)) {
+			suffix = "znacht";
+		}
+		// hour is between 5 and 11
+		else if ((5 <= hh) && (hh <= 11)) {
+			suffix = "am morge";
+		}
+		// hour is 12
+		else if (hh == 12) {
+			suffix = "am mittag";
+		}
+		// hour is between 13 and 17
+		else if ((13 <= hh) && (hh <= 17)) {
+			suffix = "am namittag";
+		}
+		// hour is between 18 and 22
+		else if ((18 <= hh) && (hh <= 22)) {
+			suffix = "am abig";
+		}
+
+		// change hour from 24 to modulo 12
+		if ((hh == 24) || (hh == 12) || (hh == 0)) {
+			hh = 12;
+		} else {
+			hh = hh % 12;
+		}
+
+		// determine hh suffix i
+		if (3 < hh) {
+			suffix_i = "i";
+		} else {
+			suffix_i = "";
+		}
+
+		String swisshour = mm_prefix + hh + suffix_i + " " + suffix;
+
+		return swisshour;
+	}
+}
