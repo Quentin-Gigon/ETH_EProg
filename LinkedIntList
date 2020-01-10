@@ -1,0 +1,150 @@
+
+public class LinkedIntList {
+
+	public static IntNode first;
+	public static IntNode last;
+	public static int size;
+
+	// constructs an empty list
+	public LinkedIntList() {
+		first = null;
+		last = null;
+		size = 0;
+	}
+
+	// returns a bracketed comma separated version of the list
+	public String toString() {
+		if (first == null) {
+			return "[]";
+		} else {
+			String result = "[" + first.data;
+			IntNode current = first.next;
+			while (current != null) {
+				result = result + "," + current.data;
+				current = current.next;
+			}
+			result = result + "]";
+			return result;
+		}
+	}
+
+	// appends given value to the beginning of the li^st
+	public void addFirst(int value) {
+		if (first == null) {
+			first = new IntNode(value);
+			last = first;
+			size++;
+		} else {
+			IntNode temp = first;
+			first = new IntNode(value, temp);
+			size++;
+		}
+	}
+
+	// appends given value to the end of the list
+	public void addLast(int value) {
+		if (first == null) {
+			first = new IntNode(value);
+			last = first;
+			size++;
+		} else {
+			IntNode current = first;
+			while (current.next != null) {
+				current = current.next;
+			}
+			current.next = (new IntNode(value));
+			last = current.next;
+			size++;
+		}
+	}
+
+	// removes first element of the list
+	public int removeFirst() {
+		if (first == null) {
+			Errors.error("The list is empty, no element to remove");
+		}
+
+		int removed = first.data;
+		first = first.next;
+		size--;
+		return removed;
+	}
+
+	// removes last element of the list
+	public int removeLast() {
+		if (first == null) {
+			Errors.error("The list is empty, no element to remove");
+		}
+
+		int removed = last.data;
+		IntNode current = first;
+		while (current.next != last) {
+			current = current.next;
+		}
+		current.next = null;
+		last = current;
+		size--;
+
+		return removed;
+	}
+
+	// clears the list
+	public void clear() {
+		first = null;
+		last = first;
+		size = 0;
+	}
+
+	// checks whether list is empty or not
+	public boolean isEmpty() {
+		if (first == null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// retrieves value at inputted index
+	public int get(int index) {
+		IntNode current = first;
+		if (index > size) {
+			Errors.error("there is no element at this index");
+		} else {
+			for (int i = 1; i < index; i++) {
+				current = current.next;
+			}
+		}
+		return current.data;
+	}
+
+	// changes value at inputted index with inputted value
+	public void set(int index, int value) {
+		IntNode current = first;
+		if (index > size) {
+			Errors.error("there is no element at this index");
+		} else {
+			for (int i = 1; i < index; i++) {
+				current = current.next;
+			}
+		}
+		current.data = value;
+	}
+
+	public static void main(String[] args) {
+		LinkedIntList newlist = new LinkedIntList();
+		newlist.addLast(100);
+		newlist.addLast(77);
+		newlist.addLast(88);
+		newlist.addLast(99);
+		newlist.set(2, 100);
+
+		System.out.println("List Size =" + size);
+		if (first != null) {
+			System.out.println("First ->" + first.data);
+		}
+		if (first != null) {
+			System.out.println("Last->" + last.data);
+		}
+		System.out.println(newlist.toString());
+	}
+}
