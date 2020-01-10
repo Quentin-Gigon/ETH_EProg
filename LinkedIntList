@@ -5,6 +5,23 @@ public class LinkedIntList {
 	public static IntNode last;
 	public static int size;
 
+	public static class IntNode {
+		public int data; // data sored in this node
+		public IntNode next; // link to next node of the list
+
+		public IntNode() {
+		}
+
+		public IntNode(int data) {
+			this.data = data;
+		}
+
+		public IntNode(int data, IntNode next) {
+			this.data = data;
+			this.next = next;
+		}
+	}
+
 	// constructs an empty list
 	public LinkedIntList() {
 		first = null;
