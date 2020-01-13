@@ -1,0 +1,135 @@
+import java.io.PrintStream;
+
+// Veraendern Sie diese Datei nicht!
+
+public class Klassen {
+
+	public static class Alpha extends Beta {
+
+	}
+
+	public static class Beta extends Kappa {
+
+	}
+
+	public static class Iota extends Kappa {
+
+		public String name() {
+			return "Iota";
+		}
+
+		public String calc() {
+			return "";
+		}
+
+	}
+
+	public static class Kappa extends Omega {
+
+		public String name() {
+			return "Kappa";
+		}
+
+	}
+
+	static class Lambda extends Iota {
+		public Alpha choose(Alpha a, Sigma s, Iota i) {
+			Alpha aa = a;
+			return aa;
+		}
+
+		public String name() {
+			return "Lambda";
+		}
+
+	}
+
+	public static class Omega {
+		public String name() {
+			return "";
+		}
+
+		public Lambda create() {
+			JustForPrintKappa jfpk = new JustForPrintKappa();
+			return jfpk;
+		}
+
+	}
+
+	public static class Sigma extends Beta {
+
+		public int calc() {
+			return 1;
+		}
+
+	}
+
+	public static class Zeta extends Alpha {
+
+		public String name() {
+			return "Zeta";
+		}
+
+		public boolean calc() {
+			return true;
+		}
+
+	}
+
+	public static class JustForPrintKappa extends Lambda {
+		public String name() {
+			return "Kappa";
+		}
+	}
+
+	public static void main(String[] args) {
+		klassen(System.out);
+	}
+
+	public static void klassen(PrintStream output) {
+
+		Lambda l = new Lambda();
+		Sigma s = new Sigma();
+		Alpha a = new Alpha();
+		Kappa k = new Kappa();
+		Iota i = new Iota();
+		Zeta z = new Zeta();
+		Beta b = new Beta();
+		Omega o = new Omega();
+
+		Omega[] os = { z, k, l, (Omega) i };
+		for (int j = 0; j < os.length; j += 1) {
+			output.println(os[j].name());
+			output.println("---");
+		}
+
+		b = doSomething(l);
+		int n = choose(l, z);
+
+		b = l.choose(a, s, i);
+		output.println(b == a);
+		output.println("---");
+
+		boolean c = s.calc() > i.calc().length() && z.calc();
+
+		Lambda ll = o.create();
+		output.println(ll.name());
+		output.println("---");
+	}
+
+	public static int choose(Kappa k, Alpha a) {
+		return 0;
+	}
+
+	public static Kappa choose(Alpha a, Kappa k) {
+		return a;
+	}
+
+	public static Sigma doSomething(Iota i) {
+		return null;
+	}
+
+	public static int doSomething(Kappa k) {
+		return 0;
+	}
+}
