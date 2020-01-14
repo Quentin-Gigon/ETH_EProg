@@ -1,0 +1,77 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.Scanner;
+
+public class Flights {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		calculateMiles(new File("flights.txt"), new File("miles.txt"));
+	}
+
+	/**
+	 * Liest eine Datei 'input' mit Flügen von Personen ein, berechnet die Anzahl
+	 * Meilen pro Person und schreibt das Resultat in eine Datei 'output'.
+	 * 
+	 * Verändern Sie <b>nicht</b> die Signatur dieser Methode.
+	 */
+	public static void calculateMiles(File input, File output) throws FileNotFoundException {
+		Scanner scanner_input = new Scanner(input);
+		PrintStream print_output = new PrintStream(output);
+
+		while (scanner_input.hasNextLine()) {
+			// if next line is a period, consume it
+			if (scanner_input.hasNext(".")) {
+				String emptyline = scanner_input.nextLine();
+			}
+			if (!scanner_input.hasNext()) {
+				break;
+			}
+			String line = scanner_input.nextLine();
+			Scanner linescan1 = new Scanner(line);
+			String name = "";
+			while (linescan1.hasNext()) {
+				name += linescan1.next() + " ";
+			}
+			int bonus = 0;
+
+			// while the next line is not a ".", create a new line and initialize info
+			while (!scanner_input.hasNext(".")) {
+				String line2 = scanner_input.nextLine();
+				Scanner linescan2 = new Scanner(line2);
+				String flight = linescan2.next();
+				String date = linescan2.next();
+				String category = linescan2.next();
+				int intercontinentalmiles = 0;
+				if (linescan2.hasNext()) {
+					intercontinentalmiles = linescan2.nextInt();
+				}
+
+				// if there are no intercontinental miles, calculate bonus with lump sum
+				if (intercontinentalmiles == 0) {
+					if (category.contentEquals("ECONOMY")) {
+						bonus += 125;
+					} else if (category.contentEquals("BUSINESS")) {
+						bonus += 2 * 125;
+					} else if (category.contentEquals("FIRST")) {
+						bonus += 3 * 125;
+					}
+
+					// if there are intercontinental miles, calculate bonus with intercontinental
+					// miles
+				} else if (intercontinentalmiles != 0) {
+					if (category.contentEquals("ECONOMY")) {
+						bonus += intercontinentalmiles;
+					} else if (category.contentEquals("BUSINESS")) {
+						bonus += 2 * intercontinentalmiles;
+					} else if (category.contentEquals("FIRST")) {
+						bonus += 3 * intercontinentalmiles;
+					}
+				}
+			}
+			// print name + bonus points to output file
+			print_output.println(name + ": " + bonus);
+		}
+	}
+
+}
