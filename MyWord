@@ -1,0 +1,78 @@
+package bonus;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+public class MyWord implements Comparable<MyWord> {
+
+	private String word;
+	private Set<Integer> positions;
+
+	public MyWord(String word, Set<Integer> positions) {
+		this.word = word;
+		this.positions = positions;
+	}
+
+	public String getWord() {
+		return word;
+	}
+
+	public Set<Integer> getPositionsSet() {
+		return positions;
+	}
+
+	public Set<Integer> getPositions() {
+		return new HashSet<Integer>(positions);
+	}
+
+	@Override
+	public String toString() {
+		return word + ": " + positions.toString();
+	}
+
+	@Override
+	public int compareTo(MyWord o) {
+		Iterator<Integer> i = positions.iterator();
+		Iterator<Integer> i_other = o.getPositionsSet().iterator();
+
+		// find min and max position for object, compute gap
+		int min = i.next();
+		int max = min;
+		int position;
+		while (i.hasNext()) {
+			position = i.next();
+			if (position < min) {
+				min = position;
+			}
+			if (position > max) {
+				max = position;
+			}
+		}
+		int gap = max - min;
+
+		// find min and max position for other object, compute gap
+		int min_other = i_other.next();
+		int max_other = min_other;
+		int position_other;
+		while (i_other.hasNext()) {
+			position_other = i_other.next();
+			if (position_other < min_other) {
+				min_other = position_other;
+			}
+			if (position_other > max_other) {
+				max_other = position_other;
+			}
+		}
+		int gap_other = max_other - min_other;
+
+		// compare gap of original element with other
+		if (gap < gap_other) {
+			return -1;
+		} else if (gap == gap_other) {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+}
