@@ -1,0 +1,78 @@
+package bonus;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+public class WordService {
+	List<MyWord> WordList = new ArrayList<MyWord>();
+
+	public static void main(String[] args) throws FileNotFoundException {
+		WordScanner input = new WordScanner(new File("loremIpsum.txt"));
+
+		WordService service = new WordService(input);
+
+		for (MyWord word : service.getWords()) {
+			System.out.println(word);
+		}
+
+		System.out.println("----------------------------------");
+
+		List<MyWord> topWords = service.top(3);
+
+		for (MyWord word : topWords) {
+			System.out.println(word);
+		}
+	}
+
+	public WordService(WordScanner scanner) {
+		int position = 0;
+		while (scanner.hasNext()) {
+			String word = scanner.next();
+			boolean isNewWord = true;
+			for (int i = 0; i < WordList.size(); i++) {
+				// WordList contains word, add position to word
+				if (WordList.get(i).getWord().equalsIgnoreCase(word)) {
+					WordList.get(i).getPositionsSet().add(position);
+					isNewWord = false;
+					break;
+				}
+			}
+			// WordList does not contain word, add new word with position
+			if (isNewWord) {
+				Set<Integer> positions = new HashSet<Integer>();
+				positions.add(position);
+				MyWord new_word = new MyWord(word, positions);
+				WordList.add(new_word);
+			}
+			position++;
+		}
+	}
+
+	public List<MyWord> getWords() {
+		return WordList;
+	}
+
+	public List<MyWord> top(int number) {
+		List<MyWord> max_word = new ArrayList<MyWord>();
+		List<MyWord> WordList_copy = new ArrayList<MyWord>();
+		WordList_copy.addAll(WordList);
+
+		for (int i = 0; i < number; i++) {
+			MyWord max = WordList_copy.get(0);
+			for (int j = 0; j < WordList_copy.size(); j++) {
+				MyWord currentWord = WordList_copy.get(j);
+				if (currentWord.compareTo(max) == 1) {
+					max = currentWord;
+				}
+			}
+			max_word.add(max);
+			WordList_copy.remove(max);
+		}
+		return max_word;
+	}
+}
