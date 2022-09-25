@@ -1,3 +1,15 @@
+/*
+Statt eine Vorlage zu benützen, schreiben Sie in dieser Aufgabe ein Programm von Grund auf
+selbst. Eclipse wird Ihnen allerdings etwas Schreibarbeit abnehmen.
+1. Erstellen Sie eine neue Java-Datei “SwissFlag.java”. Wählen Sie dafür im Menü File → New → Class oder klicken Sie auf das   Symbol in der Symbolleiste. Geben Sie im Dialog bei Name “SwissFlag” ein und drücken Sie “Finish”.
+2. Erstellen Sie zuerst eine leere main-Methode, so wie Sie es bei anderen Programmen gesehen haben. (Tipp: Sie können in Zukunft auch die Option public static void main(String[] args) im Dialog für neue Java-Klassen auswählen, um sich ein wenig Arbeit zu sparen.)
+3. Erweitern Sie das Programm so, dass es die Schweizerfahne in der Konsole ausgibt. Die Fahne könnte ungefähr wie folgt aussehen, Sie dürfen aber auch eine grössere oder schönere Version entwerfen:
+
+Teilen Sie das Programm in mehrere Methoden auf, welche von der main-Methode aufgerufen werden. Damit sorgen Sie dafür, dass weniger Wiederholungen von Code-Stücken vorkom- men, was das Ändern des Programms deutlich einfacher macht.
+*/
+
+
+
 public class ForwardAndBackward {
     
     public static void main(String[] args) {
