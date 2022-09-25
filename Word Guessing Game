@@ -1,3 +1,29 @@
+/*
+Das Programm “WoerterRaten.java” enthält Fragmente eines Rate-Spiels, welches Sie vervoll- ständigen sollen. In dem Spiel wählt der Computer zufällig ein Wort w aus einer Liste aus und der Mensch muss versuchen, das Wort zu erraten. In jeder Runde kann der Mensch eine Zeichenfolge z (welche einen oder mehrere Buchstaben enthält) eingeben und der Computer gibt einen Hinweis dazu. Folgende Hinweise sind möglich:
+1. w beginnt mit z 2. w endet mit z
+3. w enthält z
+4. w enthält nicht z
+Die Hinweise 1 und 2 können kombiniert werden. Beachten Sie ausserdem, dass die Hinweise 1 und 2 den Hinweis 3 schon enthalten. Das Spiel endet, wenn der Mensch das Wort vollständig eingibt. Dann gibt der Computer den Pseudo-Hinweis “w ist z” und die Anzahl Versuche aus.
+a) Öffnen Sie die Text-Datei “woerter.txt”, welche sich direkt im Projekt-Ordner befindet. Aus dieser Datei liest das Programm (in der Methode liesWoerter()) die Wörter ein. Auf der ersten Zeile steht die Anzahl der Wörter, danach folgt auf jeder Zeile ein neues Wort. Fügen Sie der Liste einige eigene Wörter hinzu und ändern Sie die Zahl oben entsprechend.
+b) Vervollständigen Sie das Programm “WoerterRaten.java”, indem Sie die noch leeren Meth- oden ausfüllen. Beachten Sie, dass die Datei “WoerterRatenTest.java” Tests für die Metho- den hinweis() und zufallsWort() enthält. Wenn Sie sich an die Vorgaben gehalten haben, sollten alle Tests erfolgreich durchlaufen. Folgende Methoden könnten sich als hilfreich er- weisen: String.equals(), String.startsWith(), String.endsWith(), String.contains()
+1
+und Random.nextInt() (um nextInt() aufzurufen, müssen Sie zuerst per new Random() ein Objekt vom Typ Random erstellen).
+Für die Haupt-Methode rateSpiel() gibt es keine Tests. Sie sollten diese Methode so schreiben, dass sich das Programm ungefähr wie in folgendem Beispiel-Ablauf verhält (die Benutzer- Eingaben sind grün dargestellt):
+      Tipp? e
+      Das Wort enthält nicht "e"!
+      Tipp? a
+      Das Wort endet mit "a"!
+      Tipp? j
+      Das Wort beginnt mit "j"!
+      Tipp? v
+      Das Wort enthält "v"!
+      Tipp? java
+      Das Wort ist "java"!
+      Glückwunsch, du hast nur 5 Versuche benötigt!
+Tipp: Das Spiel wird richtig schwierig, wenn Sie die Liste der möglichen Wörter nicht kennen (oder die Liste sehr lang ist). Tauschen Sie doch mal Ihre “woerter.txt”-Datei mit der eines Mitstudierenden aus, ohne sie anzusehen.
+*/
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
